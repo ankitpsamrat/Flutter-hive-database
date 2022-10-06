@@ -1,33 +1,25 @@
-// import 'dart:io';
 import 'package:flutter/material.dart';
-// import 'package:hive/hive.dart';
-import 'package:hive_database/pages/home_page.dart';
-// import 'package:path_provider/path_provider.dart';
+import 'package:hive_database/pages/splash.dart';
+import 'package:hive_database/theme.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  //  hive directory path method
-
-  // Directory document = await getApplicationDocumentsDirectory();
-  // Hive.init(document.path);
-
-  //  opens a new box called 'students'
-
-  // await Hive.openBox('students');
+  await Hive.initFlutter();
+  await Hive.openBox('money');
 
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Hive Database',
-      home: HomePage(),
+      title: 'Expenses',
+      theme: myTheme,
+      home: const Splash(),
     );
   }
 }
