@@ -1,14 +1,16 @@
+// ignore_for_file: unnecessary_null_comparison, use_build_context_synchronously
+
 import 'package:flutter/material.dart';
-import 'package:hive_database/controllers/db_helper.dart';
-import 'package:hive_database/pages/add_name.dart';
-import 'package:hive_database/pages/auth.dart';
-import 'package:hive_database/pages/home_page.dart';
+import '/controllers/db_helper.dart';
+import '/pages/add_name.dart';
+import '/pages/auth.dart';
+import '/pages/home_page.dart';
 
 class Splash extends StatefulWidget {
-  const Splash({Key? key}) : super(key: key);
+  const Splash({super.key});
 
   @override
-  _SplashState createState() => _SplashState();
+  State<Splash> createState() => _SplashState();
 }
 
 class _SplashState extends State<Splash> {
@@ -24,53 +26,43 @@ class _SplashState extends State<Splash> {
   Future getName() async {
     String? name = await dbHelper.getName();
     if (name != null) {
-      // user has entered a name
-      // since name is also important and can't be null
-      // we will check for auth here and will show , auth if it is on
       bool? auth = await dbHelper.getLocalAuth();
       if (auth != null && auth) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => FingerPrintAuth(),
+            builder: (context) => const FingerPrintAuth(),
           ),
         );
       } else {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => HomePage(),
+            builder: (context) => const HomePage(),
           ),
         );
       }
     } else {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => AddName(),
+          builder: (context) => const AddName(),
         ),
       );
     }
   }
 
-  //
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0.0,
       ),
-      //
-      backgroundColor: Color(0xffe2e7ef),
-      //
+      backgroundColor: const Color(0xffe2e7ef),
       body: Center(
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white70,
-            borderRadius: BorderRadius.circular(
-              12.0,
-            ),
+            borderRadius: BorderRadius.circular(12.0),
           ),
-          padding: EdgeInsets.all(
-            16.0,
-          ),
+          padding: const EdgeInsets.all(16.0),
           child: Image.asset(
             "assets/images/icon.png",
             width: 64.0,

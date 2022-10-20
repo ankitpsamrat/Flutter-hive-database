@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
-showConfirmDialog(BuildContext context, String title, String content) async {
+showConfirmDialog(
+  BuildContext context,
+  String title,
+  String content,
+) async {
   return await showDialog(
     context: context,
     builder: (context) => AlertDialog(
@@ -16,17 +20,13 @@ showConfirmDialog(BuildContext context, String title, String content) async {
               Colors.red,
             ),
           ),
-          child: Text(
-            "YES",
-          ),
+          child: const Text("YES"),
         ),
         ElevatedButton(
           onPressed: () {
             Navigator.of(context).pop(false);
           },
-          child: Text(
-            "No",
-          ),
+          child: const Text("No"),
         ),
       ],
     ),

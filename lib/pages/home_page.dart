@@ -1,28 +1,33 @@
+// ignore_for_file: library_prefixes
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:hive_database/controllers/db_helper.dart';
-import 'package:hive_database/pages/add_transaction.dart';
-import 'package:hive_database/pages/models/transaction.dart';
-import 'package:hive_database/pages/setting.dart';
-import 'package:hive_database/pages/widgets/confirm_dailog.dart';
-import 'package:hive_database/pages/widgets/snackbar.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '/static.dart' as Static;
+import '/controllers/db_helper.dart';
+import '/pages/add_transaction.dart';
+import '/pages/models/transaction.dart';
+import '/pages/setting.dart';
+import '/pages/widgets/confirm_dailog.dart';
+import '/pages/widgets/snackbar.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
-  _HomePageState createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
   //
+
+  DbHelper dbHelper = DbHelper();
+
   late Box box;
   late SharedPreferences preferences;
-  DbHelper dbHelper = DbHelper();
+
   Map? data;
   int totalBalance = 0;
   int totalIncome = 0;
@@ -78,7 +83,6 @@ class _HomePageState extends State<HomePage> {
       return items;
     }
   }
-  //
 
   List<FlSpot> getPlotPoints(List<TransactionModel> entireData) {
     dataSet = [];
@@ -89,10 +93,8 @@ class _HomePageState extends State<HomePage> {
         tempdataSet.add(item);
       }
     }
-    //
-    // Sorting the list as per the date
+
     tempdataSet.sort((a, b) => a.date.day.compareTo(b.date.day));
-    //
     for (var i = 0; i < tempdataSet.length; i++) {
       dataSet.add(
         FlSpot(
@@ -128,14 +130,13 @@ class _HomePageState extends State<HomePage> {
         toolbarHeight: 0.0,
       ),
       backgroundColor: Colors.grey[200],
-      //
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context)
               .push(
             CupertinoPageRoute(
-              builder: (context) => AddExpenseNoGradient(),
+              builder: (context) => const AddExpenseNoGradient(),
             ),
           )
               .then((value) {
@@ -143,23 +144,20 @@ class _HomePageState extends State<HomePage> {
           });
         },
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(
-            16.0,
-          ),
+          borderRadius: BorderRadius.circular(16.0),
         ),
         backgroundColor: Static.PrimaryColor,
-        child: Icon(
+        child: const Icon(
           Icons.add_outlined,
           size: 32.0,
         ),
       ),
-      //
       body: FutureBuilder<List<TransactionModel>>(
         future: fetch(),
         builder: (context, snapshot) {
           // print(snapshot.data);
           if (snapshot.hasError) {
-            return Center(
+            return const Center(
               child: Text(
                 "Oopssss !!! There is some error !",
                 style: TextStyle(
@@ -170,7 +168,7 @@ class _HomePageState extends State<HomePage> {
           }
           if (snapshot.hasData) {
             if (snapshot.data!.isEmpty) {
-              return Center(
+              return const Center(
                 child: Text(
                   "No transaction yet !",
                   style: TextStyle(
@@ -179,16 +177,13 @@ class _HomePageState extends State<HomePage> {
                 ),
               );
             }
-            //
+
             getTotalBalance(snapshot.data!);
             getPlotPoints(snapshot.data!);
             return ListView(
               children: [
-                //
                 Padding(
-                  padding: const EdgeInsets.all(
-                    12.0,
-                  ),
+                  padding: const EdgeInsets.all(12.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -196,10 +191,8 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Container(
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                32.0,
-                              ),
-                              gradient: LinearGradient(
+                              borderRadius: BorderRadius.circular(32.0),
+                              gradient: const LinearGradient(
                                 colors: <Color>[
                                   Static.PrimaryColor,
                                   Colors.blueAccent,
@@ -215,9 +208,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            width: 8.0,
-                          ),
+                          const SizedBox(width: 8.0),
                           SizedBox(
                             width: 200.0,
                             child: Text(
@@ -234,27 +225,23 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(
-                            12.0,
-                          ),
+                          borderRadius: BorderRadius.circular(12.0),
                           color: Colors.white70,
                         ),
-                        padding: EdgeInsets.all(
-                          12.0,
-                        ),
+                        padding: const EdgeInsets.all(12.0),
                         child: InkWell(
                           onTap: () {
                             Navigator.of(context)
                                 .push(
                               MaterialPageRoute(
-                                builder: (context) => Settings(),
+                                builder: (context) => const Settings(),
                               ),
                             )
                                 .then((value) {
                               setState(() {});
                             });
                           },
-                          child: Icon(
+                          child: const Icon(
                             Icons.settings,
                             size: 32.0,
                             color: Color(0xff3E454C),
@@ -269,9 +256,7 @@ class _HomePageState extends State<HomePage> {
                 //
                 Container(
                   width: MediaQuery.of(context).size.width * 0.9,
-                  margin: EdgeInsets.all(
-                    12.0,
-                  ),
+                  margin: const EdgeInsets.all(12.0),
                   child: Ink(
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
@@ -281,28 +266,24 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       borderRadius: BorderRadius.all(
-                        Radius.circular(
-                          24.0,
-                        ),
+                        Radius.circular(24.0),
                       ),
                     ),
                     child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(
-                          Radius.circular(
-                            24.0,
-                          ),
+                          Radius.circular(24.0),
                         ),
                         // color: Static.PrimaryColor,
                       ),
                       alignment: Alignment.center,
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         vertical: 18.0,
                         horizontal: 8.0,
                       ),
                       child: Column(
                         children: [
-                          Text(
+                          const Text(
                             'Total Balance',
                             textAlign: TextAlign.center,
                             style: TextStyle(
@@ -311,21 +292,17 @@ class _HomePageState extends State<HomePage> {
                               color: Colors.white,
                             ),
                           ),
-                          SizedBox(
-                            height: 12.0,
-                          ),
+                          const SizedBox(height: 12.0),
                           Text(
                             'Rs $totalBalance',
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 36.0,
                               fontWeight: FontWeight.w700,
                               color: Colors.white,
                             ),
                           ),
-                          SizedBox(
-                            height: 12.0,
-                          ),
+                          const SizedBox(height: 12.0),
                           Padding(
                             padding: const EdgeInsets.all(12.0),
                             child: Row(
@@ -345,64 +322,52 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                //
                 Padding(
-                  padding: const EdgeInsets.all(
-                    12.0,
-                  ),
+                  padding: const EdgeInsets.all(12.0),
                   child: Text(
                     "${months[today.month - 1]} ${today.year}",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 28,
                       color: Colors.black87,
                       fontWeight: FontWeight.w900,
                     ),
                   ),
                 ),
-                //
                 dataSet.isEmpty || dataSet.length < 2
                     ? Container(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           vertical: 40.0,
                           horizontal: 20.0,
                         ),
-                        margin: EdgeInsets.all(
-                          12.0,
-                        ),
+                        margin: const EdgeInsets.all(12.0),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(
-                            8.0,
-                          ),
+                          borderRadius: BorderRadius.circular(8.0),
                           color: Colors.white,
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey.withOpacity(0.5),
                               spreadRadius: 5,
                               blurRadius: 7,
-                              offset:
-                                  Offset(0, 3), // changes position of shadow
+                              offset: const Offset(
+                                  0, 3), // changes position of shadow
                             ),
                           ],
                         ),
-                        child: Text(
+                        child: const Text(
                           "Not Enough Data to render Chart",
-                          style: TextStyle(
-                            fontSize: 20.0,
-                          ),
+                          style: TextStyle(fontSize: 20.0),
                         ),
                       )
                     : Container(
                         height: 400.0,
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           vertical: 40.0,
                           horizontal: 12.0,
                         ),
-                        margin: EdgeInsets.all(
-                          12.0,
-                        ),
+                        margin: const EdgeInsets.all(12.0),
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.only(
+                          borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(8),
                             topRight: Radius.circular(8),
                             bottomLeft: Radius.circular(8),
@@ -413,16 +378,14 @@ class _HomePageState extends State<HomePage> {
                               color: Colors.grey.withOpacity(0.5),
                               spreadRadius: 5,
                               blurRadius: 7,
-                              offset:
-                                  Offset(0, 3), // changes position of shadow
+                              offset: const Offset(
+                                  0, 3), // changes position of shadow
                             ),
                           ],
                         ),
                         child: LineChart(
                           LineChartData(
-                            borderData: FlBorderData(
-                              show: false,
-                            ),
+                            borderData: FlBorderData(show: false),
                             lineBarsData: [
                               LineChartBarData(
                                 // spots: getPlotPoints(snapshot.data!),
@@ -433,17 +396,14 @@ class _HomePageState extends State<HomePage> {
                                 //   Static.PrimaryColor,
                                 // ],
                                 showingIndicators: [200, 200, 90, 10],
-                                dotData: FlDotData(
-                                  show: true,
-                                ),
+                                dotData: FlDotData(show: true),
                               ),
                             ],
                           ),
                         ),
                       ),
-                //
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
+                const Padding(
+                  padding: EdgeInsets.all(12.0),
                   child: Text(
                     "Recent Transactions",
                     style: TextStyle(
@@ -453,10 +413,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                //
                 ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: snapshot.data!.length + 1,
                   itemBuilder: (context, index) {
                     TransactionModel dataAtIndex;
@@ -464,8 +423,6 @@ class _HomePageState extends State<HomePage> {
                       // dataAtIndex = snapshot.data![index];
                       dataAtIndex = snapshot.data![index];
                     } catch (e) {
-                      // deleteAt deletes that key and value,
-                      // hence makign it null here., as we still build on the length.
                       return Container();
                     }
 
@@ -490,16 +447,11 @@ class _HomePageState extends State<HomePage> {
                     }
                   },
                 ),
-                //
-                SizedBox(
-                  height: 60.0,
-                ),
+                const SizedBox(height: 60.0),
               ],
             );
           } else {
-            return Text(
-              "Loading...",
-            );
+            return const Text("Loading...");
           }
         },
       ),
@@ -523,7 +475,7 @@ class _HomePageState extends State<HomePage> {
               20.0,
             ),
           ),
-          padding: EdgeInsets.all(
+          padding: const EdgeInsets.all(
             6.0,
           ),
           child: Icon(
@@ -531,14 +483,14 @@ class _HomePageState extends State<HomePage> {
             size: 28.0,
             color: Colors.green[700],
           ),
-          margin: EdgeInsets.only(
+          margin: const EdgeInsets.only(
             right: 8.0,
           ),
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               "Income",
               style: TextStyle(
                 fontSize: 14.0,
@@ -547,7 +499,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Text(
               value,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.w700,
                 color: Colors.white,
@@ -569,7 +521,7 @@ class _HomePageState extends State<HomePage> {
               20.0,
             ),
           ),
-          padding: EdgeInsets.all(
+          padding: const EdgeInsets.all(
             6.0,
           ),
           child: Icon(
@@ -577,14 +529,14 @@ class _HomePageState extends State<HomePage> {
             size: 28.0,
             color: Colors.red[700],
           ),
-          margin: EdgeInsets.only(
+          margin: const EdgeInsets.only(
             right: 8.0,
           ),
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               "Expense",
               style: TextStyle(
                 fontSize: 14.0,
@@ -593,7 +545,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Text(
               value,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.w700,
                 color: Colors.white,
@@ -628,10 +580,8 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(18.0),
         margin: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-          color: Color(0xffced4eb),
-          borderRadius: BorderRadius.circular(
-            8.0,
-          ),
+          color: const Color(0xffced4eb),
+          borderRadius: BorderRadius.circular(8.0),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -649,10 +599,8 @@ class _HomePageState extends State<HomePage> {
                           size: 28.0,
                           color: Colors.red[700],
                         ),
-                        SizedBox(
-                          width: 4.0,
-                        ),
-                        Text(
+                        const SizedBox(width: 4.0),
+                        const Text(
                           "Expense",
                           style: TextStyle(
                             fontSize: 20.0,
@@ -660,8 +608,6 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ],
                     ),
-
-                    //
                     Padding(
                       padding: const EdgeInsets.all(6.0),
                       child: Text(
@@ -678,12 +624,11 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Text(
                       "- $value",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 24.0,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                    //
                     Padding(
                       padding: const EdgeInsets.all(6.0),
                       child: Text(
@@ -727,10 +672,8 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(18.0),
         margin: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-          color: Color(0xffced4eb),
-          borderRadius: BorderRadius.circular(
-            8.0,
-          ),
+          color: const Color(0xffced4eb),
+          borderRadius: BorderRadius.circular(8.0),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -745,10 +688,8 @@ class _HomePageState extends State<HomePage> {
                       size: 28.0,
                       color: Colors.green[700],
                     ),
-                    SizedBox(
-                      width: 4.0,
-                    ),
-                    Text(
+                    const SizedBox(width: 4.0),
+                    const Text(
                       "Credit",
                       style: TextStyle(
                         fontSize: 20.0,
@@ -756,7 +697,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-                //
                 Padding(
                   padding: const EdgeInsets.all(6.0),
                   child: Text(
@@ -766,7 +706,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                //
               ],
             ),
             Column(
@@ -774,13 +713,11 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Text(
                   "+ $value",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                //
-                //
                 Padding(
                   padding: const EdgeInsets.all(6.0),
                   child: Text(
@@ -800,9 +737,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget selectMonth() {
     return Padding(
-      padding: EdgeInsets.all(
-        8.0,
-      ),
+      padding: const EdgeInsets.all(8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -817,9 +752,7 @@ class _HomePageState extends State<HomePage> {
               height: 50.0,
               width: MediaQuery.of(context).size.width * 0.3,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  8.0,
-                ),
+                borderRadius: BorderRadius.circular(8.0),
                 color: index == 3 ? Static.PrimaryColor : Colors.white,
               ),
               alignment: Alignment.center,
@@ -844,9 +777,7 @@ class _HomePageState extends State<HomePage> {
               height: 50.0,
               width: MediaQuery.of(context).size.width * 0.3,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  8.0,
-                ),
+                borderRadius: BorderRadius.circular(8.0),
                 color: index == 2 ? Static.PrimaryColor : Colors.white,
               ),
               alignment: Alignment.center,
@@ -871,9 +802,7 @@ class _HomePageState extends State<HomePage> {
               height: 50.0,
               width: MediaQuery.of(context).size.width * 0.3,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  8.0,
-                ),
+                borderRadius: BorderRadius.circular(8.0),
                 color: index == 1 ? Static.PrimaryColor : Colors.white,
               ),
               alignment: Alignment.center,

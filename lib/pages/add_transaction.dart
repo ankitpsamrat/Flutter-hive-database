@@ -1,16 +1,20 @@
+// ignore_for_file: library_prefixes
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hive_database/controllers/db_helper.dart';
+import '/controllers/db_helper.dart';
 import '/static.dart' as Static;
 
 class AddExpenseNoGradient extends StatefulWidget {
-  const AddExpenseNoGradient({Key? key}) : super(key: key);
+  const AddExpenseNoGradient({super.key});
 
   @override
-  _AddExpenseNoGradientState createState() => _AddExpenseNoGradientState();
+  State<AddExpenseNoGradient> createState() => _AddExpenseNoGradientState();
 }
 
 class _AddExpenseNoGradientState extends State<AddExpenseNoGradient> {
+  //
+
   DateTime selectedDate = DateTime.now();
   int? amount;
   String note = "Expence";
@@ -50,14 +54,11 @@ class _AddExpenseNoGradientState extends State<AddExpenseNoGradient> {
       appBar: AppBar(
         toolbarHeight: 0.0,
       ),
-      backgroundColor: Color(0xffe2e7ef),
-      //
+      backgroundColor: const Color(0xffe2e7ef),
       body: ListView(
-        padding: EdgeInsets.all(
-          12.0,
-        ),
+        padding: const EdgeInsets.all(12.0),
         children: [
-          Text(
+          const Text(
             "\nAdd Transaction",
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -65,11 +66,7 @@ class _AddExpenseNoGradientState extends State<AddExpenseNoGradient> {
               fontWeight: FontWeight.w700,
             ),
           ),
-          //
-          SizedBox(
-            height: 20.0,
-          ),
-          //
+          const SizedBox(height: 20.0),
           Row(
             children: [
               Container(
@@ -79,28 +76,22 @@ class _AddExpenseNoGradientState extends State<AddExpenseNoGradient> {
                     16.0,
                   ),
                 ),
-                padding: EdgeInsets.all(
-                  12.0,
-                ),
-                child: Icon(
+                padding: const EdgeInsets.all(12.0),
+                child: const Icon(
                   Icons.attach_money,
                   size: 24.0,
                   // color: Colors.grey[700],
                   color: Colors.white,
                 ),
               ),
-              SizedBox(
-                width: 12.0,
-              ),
+              const SizedBox(width: 12.0),
               Expanded(
                 child: TextField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: "0",
                     border: InputBorder.none,
                   ),
-                  style: TextStyle(
-                    fontSize: 24.0,
-                  ),
+                  style: const TextStyle(fontSize: 24.0),
                   onChanged: (val) {
                     try {
                       amount = int.parse(val);
@@ -109,23 +100,19 @@ class _AddExpenseNoGradientState extends State<AddExpenseNoGradient> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           backgroundColor: Colors.red,
-                          duration: Duration(
+                          duration: const Duration(
                             seconds: 2,
                           ),
                           content: Row(
-                            children: [
+                            children: const [
                               Icon(
                                 Icons.info_outline,
                                 color: Colors.white,
                               ),
-                              SizedBox(
-                                width: 6.0,
-                              ),
+                              SizedBox(width: 6.0),
                               Text(
                                 "Enter only Numbers as Amount",
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                ),
+                                style: TextStyle(fontSize: 16.0),
                               ),
                             ],
                           ),
@@ -143,43 +130,31 @@ class _AddExpenseNoGradientState extends State<AddExpenseNoGradient> {
               ),
             ],
           ),
-          //
-          SizedBox(
-            height: 20.0,
-          ),
-          //
+          const SizedBox(height: 20.0),
           Row(
             children: [
               Container(
                 decoration: BoxDecoration(
                   color: Static.PrimaryColor,
-                  borderRadius: BorderRadius.circular(
-                    16.0,
-                  ),
+                  borderRadius: BorderRadius.circular(16.0),
                 ),
-                padding: EdgeInsets.all(
-                  12.0,
-                ),
-                child: Icon(
+                padding: const EdgeInsets.all(12.0),
+                child: const Icon(
                   Icons.description,
                   size: 24.0,
                   // color: Colors.grey[700],
                   color: Colors.white,
                 ),
               ),
-              SizedBox(
-                width: 12.0,
-              ),
+              const SizedBox(width: 12.0),
               Expanded(
                 child: TextField(
                   textInputAction: TextInputAction.done,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: "Note on Transaction",
                     border: InputBorder.none,
                   ),
-                  style: TextStyle(
-                    fontSize: 20.0,
-                  ),
+                  style: const TextStyle(fontSize: 20.0),
                   onChanged: (val) {
                     note = val;
                   },
@@ -187,33 +162,23 @@ class _AddExpenseNoGradientState extends State<AddExpenseNoGradient> {
               ),
             ],
           ),
-          //
-          SizedBox(
-            height: 20.0,
-          ),
-          //
+          const SizedBox(height: 20.0),
           Row(
             children: [
               Container(
                 decoration: BoxDecoration(
                   color: Static.PrimaryColor,
-                  borderRadius: BorderRadius.circular(
-                    16.0,
-                  ),
+                  borderRadius: BorderRadius.circular(16.0),
                 ),
-                padding: EdgeInsets.all(
-                  12.0,
-                ),
-                child: Icon(
+                padding: const EdgeInsets.all(12.0),
+                child: const Icon(
                   Icons.attach_money,
                   size: 24.0,
                   // color: Colors.grey[700],
                   color: Colors.white,
                 ),
               ),
-              SizedBox(
-                width: 12.0,
-              ),
+              const SizedBox(width: 12.0),
               ChoiceChip(
                 label: Text(
                   "Income",
@@ -235,9 +200,7 @@ class _AddExpenseNoGradientState extends State<AddExpenseNoGradient> {
                 },
                 selected: type == "Income" ? true : false,
               ),
-              SizedBox(
-                width: 8.0,
-              ),
+              const SizedBox(width: 8.0),
               ChoiceChip(
                 label: Text(
                   "Expense",
@@ -262,18 +225,12 @@ class _AddExpenseNoGradientState extends State<AddExpenseNoGradient> {
               ),
             ],
           ),
-          //
-          SizedBox(
-            height: 20.0,
-          ),
-          //
+          const SizedBox(height: 20.0),
           SizedBox(
             height: 50.0,
             child: TextButton(
               onPressed: () {
                 _selectDate(context);
-                //
-                // to make sure that no keyboard is shown after selecting Date
                 FocusScope.of(context).unfocus();
               },
               style: ButtonStyle(
@@ -286,23 +243,17 @@ class _AddExpenseNoGradientState extends State<AddExpenseNoGradient> {
                   Container(
                     decoration: BoxDecoration(
                       color: Static.PrimaryColor,
-                      borderRadius: BorderRadius.circular(
-                        16.0,
-                      ),
+                      borderRadius: BorderRadius.circular(16.0),
                     ),
-                    padding: EdgeInsets.all(
-                      12.0,
-                    ),
-                    child: Icon(
+                    padding: const EdgeInsets.all(12.0),
+                    child: const Icon(
                       Icons.date_range,
                       size: 24.0,
                       // color: Colors.grey[700],
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(
-                    width: 12.0,
-                  ),
+                  const SizedBox(width: 12.0),
                   Text(
                     "${selectedDate.day} ${months[selectedDate.month - 1]}",
                     style: TextStyle(
@@ -314,11 +265,7 @@ class _AddExpenseNoGradientState extends State<AddExpenseNoGradient> {
               ),
             ),
           ),
-          //
-          SizedBox(
-            height: 20.0,
-          ),
-          //
+          const SizedBox(height: 20.0),
           SizedBox(
             height: 50.0,
             child: ElevatedButton(
@@ -331,7 +278,7 @@ class _AddExpenseNoGradientState extends State<AddExpenseNoGradient> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       backgroundColor: Colors.red[700],
-                      content: Text(
+                      content: const Text(
                         "Please enter a valid Amount !",
                         style: TextStyle(
                           fontSize: 16.0,
@@ -342,7 +289,7 @@ class _AddExpenseNoGradientState extends State<AddExpenseNoGradient> {
                   );
                 }
               },
-              child: Text(
+              child: const Text(
                 "Add",
                 style: TextStyle(
                   fontSize: 20.0,

@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:flutter/material.dart';
 
 const MaterialColor PrimaryMaterialColor = MaterialColor(
@@ -68,9 +70,9 @@ const MaterialColor PrimaryMaterialColor = MaterialColor(
 
 ThemeData myTheme = ThemeData(
   fontFamily: "customFont",
-  primaryColor: Color(0xff15049b),
+  primaryColor: const Color(0xff15049b),
   primarySwatch: PrimaryMaterialColor,
-  appBarTheme: AppBarTheme(
+  appBarTheme: const AppBarTheme(
     titleTextStyle: TextStyle(
       fontSize: 20.0,
       fontFamily: "customFont",

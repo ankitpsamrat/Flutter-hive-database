@@ -1,41 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// class DbHelper {
-//   late Box box;
-//   // late SharedPreferences preferences;
-
-//   DbHelper() {
-//     openBox();
-//   }
-
-//   openBox() {
-//     box = Hive.box('money');
-//   }
-
-//   //  add value in db method
-
-//   void addData(int amount, DateTime date, String type, String note) async {
-//     var value = {
-//       'amount': amount,
-//       'date': date,
-//       'type': type,
-//       'note': note,
-//     };
-//     box.add(value);
-//   }
-
-//   //  fetch value from db method
-
-//   Future<Map> fetch() {
-//     if (box.values.isEmpty) {
-//       return Future.value({});
-//     } else {
-//       return Future.value(box.toMap());
-//     }
-//   }
-// }
-
 class DbHelper {
   late Box box;
   late SharedPreferences preferences;
@@ -48,8 +13,18 @@ class DbHelper {
     box = Hive.box('money');
   }
 
-  void addData(int amount, DateTime date, String type, String note) async {
-    var value = {'amount': amount, 'date': date, 'type': type, 'note': note};
+  void addData(
+    int amount,
+    DateTime date,
+    String type,
+    String note,
+  ) async {
+    var value = {
+      'amount': amount,
+      'date': date,
+      'type': type,
+      'note': note,
+    };
     box.add(value);
   }
 

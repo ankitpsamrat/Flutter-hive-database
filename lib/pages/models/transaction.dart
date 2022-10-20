@@ -8,5 +8,10 @@ class TransactionModel {
     this.amount = this.amount + amount;
   }
 
-  TransactionModel(this.amount, this.note, this.date, this.type);
+  TransactionModel(
+    this.amount,
+    this.note,
+    this.date,
+    this.type,
+  );
 }

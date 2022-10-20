@@ -1,34 +1,32 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
-import 'package:hive_database/controllers/db_helper.dart';
-import 'package:hive_database/pages/home_page.dart';
+import '/controllers/db_helper.dart';
+import '/pages/home_page.dart';
 
 class AddName extends StatefulWidget {
-  const AddName({Key? key}) : super(key: key);
+  const AddName({super.key});
 
   @override
-  _AddNameState createState() => _AddNameState();
+  State<AddName> createState() => _AddNameState();
 }
 
 class _AddNameState extends State<AddName> {
   //
+
   DbHelper dbHelper = DbHelper();
 
   String name = "";
 
-  //
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0.0,
       ),
-      //
-      backgroundColor: Color(0xffe2e7ef),
-      //
+      backgroundColor: const Color(0xffe2e7ef),
       body: Padding(
-        padding: const EdgeInsets.all(
-          12.0,
-        ),
+        padding: const EdgeInsets.all(12.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,25 +34,17 @@ class _AddNameState extends State<AddName> {
             Container(
               decoration: BoxDecoration(
                 color: Colors.white70,
-                borderRadius: BorderRadius.circular(
-                  12.0,
-                ),
+                borderRadius: BorderRadius.circular(12.0),
               ),
-              padding: EdgeInsets.all(
-                16.0,
-              ),
+              padding: const EdgeInsets.all(16.0),
               child: Image.asset(
                 "assets/icon.png",
                 width: 64.0,
                 height: 64.0,
               ),
             ),
-            //
-            SizedBox(
-              height: 20.0,
-            ),
-            //
-            Text(
+            const SizedBox(height: 20.0),
+            const Text(
               "What should we Call You ?",
               textAlign: TextAlign.right,
               style: TextStyle(
@@ -62,41 +52,29 @@ class _AddNameState extends State<AddName> {
                 fontWeight: FontWeight.w900,
               ),
             ),
-            //
-            SizedBox(
-              height: 20.0,
-            ),
-            //
+            const SizedBox(height: 20.0),
             Container(
               decoration: BoxDecoration(
                 color: Colors.white70,
-                borderRadius: BorderRadius.circular(
-                  12.0,
-                ),
+                borderRadius: BorderRadius.circular(12.0),
               ),
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 vertical: 8.0,
                 horizontal: 16.0,
               ),
               child: TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: "Your Name",
                   border: InputBorder.none,
                 ),
-                style: TextStyle(
-                  fontSize: 20.0,
-                ),
+                style: const TextStyle(fontSize: 20.0),
                 maxLength: 12,
                 onChanged: (val) {
                   name = val;
                 },
               ),
             ),
-            //
-            SizedBox(
-              height: 20.0,
-            ),
-            //
+            const SizedBox(height: 20.0),
             SizedBox(
               height: 50.0,
               child: ElevatedButton(
@@ -111,7 +89,7 @@ class _AddNameState extends State<AddName> {
                           },
                         ),
                         backgroundColor: Colors.white,
-                        content: Text(
+                        content: const Text(
                           "Please Enter a name",
                           style: TextStyle(
                             color: Colors.black,
@@ -125,7 +103,7 @@ class _AddNameState extends State<AddName> {
                     await dbHelper.addName(name);
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (context) => HomePage(),
+                        builder: (context) => const HomePage(),
                       ),
                     );
                   }
@@ -133,24 +111,20 @@ class _AddNameState extends State<AddName> {
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all(
                     RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        12.0,
-                      ),
+                      borderRadius: BorderRadius.circular(12.0),
                     ),
                   ),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: const [
                     Text(
                       "Let's Start",
                       style: TextStyle(
                         fontSize: 20.0,
                       ),
                     ),
-                    SizedBox(
-                      width: 8.0,
-                    ),
+                    SizedBox(width: 8.0),
                     Icon(
                       Icons.arrow_right_alt,
                       size: 24.0,

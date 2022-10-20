@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hive_database/pages/splash.dart';
-import 'package:hive_database/theme.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import '/pages/splash.dart';
+import '/theme.dart';
 
 void main() async {
   await Hive.initFlutter();

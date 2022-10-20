@@ -4,7 +4,12 @@ class TransactionData {
   final String note;
   final String type;
 
-  TransactionData(this.amount, this.date, this.note, this.type);
+  TransactionData(
+    this.amount,
+    this.date,
+    this.note,
+    this.type,
+  );
 
   int get day {
     return date.day;

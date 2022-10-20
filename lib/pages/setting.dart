@@ -1,12 +1,14 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
-import 'package:hive_database/controllers/db_helper.dart';
-import 'package:hive_database/pages/widgets/confirm_dailog.dart';
+import '/controllers/db_helper.dart';
+import '/pages/widgets/confirm_dailog.dart';
 
 class Settings extends StatefulWidget {
-  const Settings({Key? key}) : super(key: key);
+  const Settings({super.key});
 
   @override
-  _SettingsState createState() => _SettingsState();
+  State<Settings> createState() => _SettingsState();
 }
 
 class _SettingsState extends State<Settings> {
@@ -14,19 +16,16 @@ class _SettingsState extends State<Settings> {
 
   DbHelper dbHelper = DbHelper();
 
-  //
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
-        title: Text("Settings"),
+        title: const Text("Settings"),
         elevation: 0,
       ),
       body: ListView(
-        padding: EdgeInsets.all(
-          12.0,
-        ),
+        padding: const EdgeInsets.all(12.0),
         children: [
           ListTile(
             onTap: () async {
@@ -38,7 +37,7 @@ class _SettingsState extends State<Settings> {
               }
             },
             tileColor: Colors.white,
-            contentPadding: EdgeInsets.symmetric(
+            contentPadding: const EdgeInsets.symmetric(
               vertical: 12.0,
               horizontal: 20.0,
             ),
@@ -47,27 +46,21 @@ class _SettingsState extends State<Settings> {
                 8.0,
               ),
             ),
-            title: Text(
+            title: const Text(
               "Clean Data",
               style: TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.w800,
               ),
             ),
-            subtitle: Text(
-              "This is irreversible",
-            ),
-            trailing: Icon(
+            subtitle: const Text("This is irreversible"),
+            trailing: const Icon(
               Icons.delete_forever,
               size: 32.0,
               color: Colors.black87,
             ),
           ),
-          //
-          SizedBox(
-            height: 20.0,
-          ),
-          //
+          const SizedBox(height: 20.0),
           ListTile(
             onTap: () async {
               String nameEditing = "";
@@ -75,9 +68,7 @@ class _SettingsState extends State<Settings> {
                 context: context,
                 builder: (context) => AlertDialog(
                   backgroundColor: Colors.grey[300],
-                  title: Text(
-                    "Enter new name",
-                  ),
+                  title: const Text("Enter new name"),
                   content: Container(
                     decoration: BoxDecoration(
                       color: Colors.white70,
@@ -85,18 +76,16 @@ class _SettingsState extends State<Settings> {
                         12.0,
                       ),
                     ),
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       vertical: 8.0,
                       horizontal: 16.0,
                     ),
                     child: TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: "Your Name",
                         border: InputBorder.none,
                       ),
-                      style: TextStyle(
-                        fontSize: 20.0,
-                      ),
+                      style: const TextStyle(fontSize: 20.0),
                       maxLength: 12,
                       onChanged: (val) {
                         nameEditing = val;
@@ -108,50 +97,39 @@ class _SettingsState extends State<Settings> {
                       onPressed: () {
                         Navigator.of(context).pop(nameEditing);
                       },
-                      child: Text(
-                        "OK",
-                      ),
+                      child: const Text("OK"),
                     ),
                   ],
                 ),
               );
-              //
               if (name != null && name.isNotEmpty) {
                 DbHelper dbHelper = DbHelper();
                 await dbHelper.addName(name);
               }
             },
             tileColor: Colors.white,
-            contentPadding: EdgeInsets.symmetric(
+            contentPadding: const EdgeInsets.symmetric(
               vertical: 12.0,
               horizontal: 20.0,
             ),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(
-                8.0,
-              ),
+              borderRadius: BorderRadius.circular(8.0),
             ),
-            title: Text(
+            title: const Text(
               "Change Name",
               style: TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.w800,
               ),
             ),
-            subtitle: Text(
-              "Welcome {newname}",
-            ),
-            trailing: Icon(
+            subtitle: const Text("Welcome {newname}"),
+            trailing: const Icon(
               Icons.change_circle,
               size: 32.0,
               color: Colors.black87,
             ),
           ),
-          //
-          // SizedBox(
-          //   height: 20.0,
-          // ),
-          // //
+          const SizedBox(height: 20.0),
           // FutureBuilder<bool>(
           //   future: dbHelper.getLocalAuth(),
           //   builder: (context, snapshot) {
@@ -165,23 +143,21 @@ class _SettingsState extends State<Settings> {
           //         },
           //         value: snapshot.data == null ? false : snapshot.data!,
           //         tileColor: Colors.white,
-          //         contentPadding: EdgeInsets.symmetric(
+          //         contentPadding: const EdgeInsets.symmetric(
           //           vertical: 12.0,
           //           horizontal: 20.0,
           //         ),
           //         shape: RoundedRectangleBorder(
-          //           borderRadius: BorderRadius.circular(
-          //             8.0,
-          //           ),
+          //           borderRadius: BorderRadius.circular(8.0),
           //         ),
-          //         title: Text(
+          //         title: const Text(
           //           "Local Bio Auth",
           //           style: TextStyle(
           //             fontSize: 20.0,
           //             fontWeight: FontWeight.w800,
           //           ),
           //         ),
-          //         subtitle: Text(
+          //         subtitle: const Text(
           //           "Secure This app, Use Fingerprint to unlock the app.",
           //         ),
           //       );
